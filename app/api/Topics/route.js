@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectMBD from "../Libs/MongoDb";
-import Topic from "../Models/Topic";
+import connectMBD from "../../Libs/MongoDb";
+import Topic from "../../Models/Topic";
 
 export async function POST(req) {
     const { title, details } = await req.json();
@@ -13,4 +13,15 @@ export async function POST(req) {
     })
 
     return NextResponse.json({ message: "Topic Added" }, { status: 201 })
+}
+
+
+export async function GET() {
+    await connectMBD()
+
+    const data = await Topics
+
+    return NextResponse.json({ data }, { status: 200 })
+
+
 }
