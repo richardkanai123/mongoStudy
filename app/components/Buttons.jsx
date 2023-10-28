@@ -25,7 +25,7 @@ const Buttons = ({ id }) => {
     const Router = useRouter()
     return (
         <aside className='flex align-middle items-center gap-4'>
-            <Link href={`Topic/${id}`}
+            <Link href={`${process.env.BASEURL}/Topic/${id}`}
                 className='text-2xl text-green-300 hover:text-lime-500'><AiFillEdit /></Link>
             <button
                 onClick={() => {
