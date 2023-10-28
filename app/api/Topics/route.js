@@ -19,7 +19,7 @@ export async function POST(req) {
 export async function GET() {
     await connectMBD()
 
-    const data = await Topics
+    const data = await Topic.find()
 
     return NextResponse.json({ data }, { status: 200 })
 

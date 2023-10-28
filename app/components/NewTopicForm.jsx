@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { toast } from 'react-toastify';
 
@@ -6,14 +7,36 @@ const NewTopicForm = () => {
     const [topicTitle, setTopicTitle] = useState('')
     const [topicDescription, setTopicDescription] = useState('')
 
+    const Router = useRouter()
 
     return (
-        <form onSubmit={(e) => {
+        <form onSubmit={async (e) => {
             e.preventDefault()
-            console.log(topicTitle, topicDescription);
+
+            if (topicTitle === "" || topicDescription === "") {
+
+                toast.error("Fill in all fields")
+                return false;
+            }
+
+            const res = await fetch('http://localhost:3000/api/Topics', {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({ title: topicTitle, details: topicDescription })
+            })
+
+            if (!res.ok) {
+                toast.error("Failed, Please try again later!")
+                return;
+            }
+
             setTopicDescription('');
             setTopicTitle('');
-            toast.success('Topic Added!')
+            toast.success('Topic Added!');
+
+            Router.refresh('/')
         }}
             className="w-full min-w-[300px] max-w-lg p-3 flex flex-col gap-4 rounded-xl">
             <section className='w-full flex  flex-col gap-1'>
