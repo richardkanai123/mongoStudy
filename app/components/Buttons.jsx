@@ -7,7 +7,7 @@ import Link from 'next/link';
 const Buttons = ({ id }) => {
 
     const DeleteByID = async () => {
-        const res = await fetch(`http://localhost:3000/api/Topics/${id}`, {
+        const res = await fetch(`${process.env.BASEURL}/Topics/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json"

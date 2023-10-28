@@ -19,7 +19,7 @@ const NewTopicForm = () => {
                 return false;
             }
 
-            const res = await fetch('http://localhost:3000/api/Topics', {
+            const res = await fetch(`${process.env.BASEURL}/api/Topics`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

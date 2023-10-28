@@ -5,7 +5,7 @@ import TopicsLoading from './components/TopicsLoading'
 
 const FetchTopics = async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/Topics', {
+    const res = await fetch(`${process.env.BASEURL}/api/Topics`, {
       cache: 'no-store'
     })
 

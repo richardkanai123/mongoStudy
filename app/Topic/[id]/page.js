@@ -38,7 +38,7 @@ const Page = ({ params }) => {
     const UpdateTopic = async () => {
 
         try {
-            const res = await fetch(`http://localhost:3000/api/Topics/${params.id}`, {
+            const res = await fetch(`${process.env.BASEURL}/api/Topics/${params.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"
