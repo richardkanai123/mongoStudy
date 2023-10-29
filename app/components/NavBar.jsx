@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import ClerkUserBtn from './ClerkUserBtn'
 
 const NavBar = () => {
     return (
@@ -7,7 +8,7 @@ const NavBar = () => {
             <Link className='font-bold text-xl hover:text-sky-300' href='/' >MongoTopics</Link>
             <div className="flex align-middle gap-4">
                 <Link href='/Add' className='text-lg hover:text-sky-300'>Add</Link>
-                <button className='p-1 rounded-lg bg-sky-800 hover:bg-sky-900'>Profile</button>
+                <ClerkUserBtn />
             </div>
         </div>
     )
