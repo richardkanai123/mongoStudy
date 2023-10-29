@@ -8,12 +8,14 @@ const Page = ({ params }) => {
     const Router = useRouter()
     const [title, setTitle] = useState('')
     const [details, setDetails] = useState('')
+    const [Loading, SetLoading] = useState(false)
 
 
     useEffect(() => {
         const FetchTopics = async () => {
+            SetLoading(true)
             try {
-                const res = await fetch(`http://localhost:3000/api/Topics/${params.id}`, {
+                const res = await fetch(`/api/Topics/${params.id}`, {
                     cache: 'no-store'
                 })
 
@@ -24,6 +26,7 @@ const Page = ({ params }) => {
                 const TopicData = data.data
                 setDetails(TopicData.details)
                 setTitle(TopicData.title)
+                SetLoading(false)
             } catch (error) {
                 console.log(error)
                 return error
@@ -38,7 +41,7 @@ const Page = ({ params }) => {
     const UpdateTopic = async () => {
 
         try {
-            const res = await fetch(`${process.env.BASEURL}/api/Topics/${params.id}`, {
+            const res = await fetch(`/api/Topics/${params.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"
@@ -66,15 +69,15 @@ const Page = ({ params }) => {
             UpdateTopic()
 
         }}
-            className="w-full min-w-[300px] max-w-lg p-3 flex flex-col gap-4 rounded-xl">
-            <p>{params.id}</p>
+            className="w-full min-w-[300px] max-w-lg p-3 flex flex-col gap-4 rounded-xl ">
+            <p>{Loading ? "Loading...." : params.id}</p>
             <section className='w-full flex  flex-col gap-1'>
                 <label htmlFor="topicTitle" className="text-lg font-semibold">Title</label>
                 <input type="text" id="topicTitle" className="bg-slate-300 rounded font-semibold text-lg p-2 ring-0 outline-0 border-none focus:bg-slate-400 " value={title} onChange={(e) => setTitle(e.target.value)} />
             </section>
             <section className='w-full flex  flex-col gap-1'>
                 <label htmlFor="topicDesc" className="text-lg font-semibold">Topic Details</label>
-                <textarea cols={5} id="topicDesc" className="bg-slate-300 rounded font-semibold text-lg p-2 ring-0 outline-0 border-none focus:bg-slate-400 " value={details} onChange={(e) => setDetails(e.target.value)} />
+                <textarea cols={5} rows={5} id="topicDesc" className="bg-slate-300 rounded font-semibold text-lg p-2 ring-0 outline-0 border-none focus:bg-slate-400 " value={details} onChange={(e) => setDetails(e.target.value)} />
             </section>
             <button className="p-2 rounded-xl text-base font-black bg-green-800 cursor-pointer w-[200px] hover:bg-lime-600" type="submit">Update Topic</button>
         </form>

@@ -19,7 +19,7 @@ const NewTopicForm = () => {
                 return false;
             }
 
-            const res = await fetch(`${process.env.BASEURL}/api/Topics`, {
+            const res = await fetch(`/api/Topics`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
@@ -45,7 +45,7 @@ const NewTopicForm = () => {
             </section>
             <section className='w-full flex  flex-col gap-1'>
                 <label htmlFor="topicDesc" className="text-lg font-semibold">Topic Details</label>
-                <textarea cols={5} id="topicDesc" className="bg-slate-300 rounded font-semibold text-lg p-2 ring-0 outline-0 border-none focus:bg-slate-400 " value={topicDescription} onChange={(e) => setTopicDescription(e.target.value)} />
+                <textarea cols={5} rows={8} id="topicDesc" className="bg-slate-300 rounded font-semibold text-lg p-2 ring-0 outline-0 border-none focus:bg-slate-400 " value={topicDescription} onChange={(e) => setTopicDescription(e.target.value)} />
             </section>
             <button className="p-2 rounded-xl text-base font-black bg-green-800 cursor-pointer w-[200px] hover:bg-lime-600" type="submit">Add Topic</button>
         </form>

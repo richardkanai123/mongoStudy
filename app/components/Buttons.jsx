@@ -7,7 +7,7 @@ import Link from 'next/link';
 const Buttons = ({ id }) => {
 
     const DeleteByID = async () => {
-        const res = await fetch(`${process.env.BASEURL}/Topics/${id}`, {
+        const res = await fetch(`/api/Topics/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json"
@@ -29,7 +29,6 @@ const Buttons = ({ id }) => {
                 className='text-2xl text-green-300 hover:text-lime-500'><AiFillEdit /></Link>
             <button
                 onClick={() => {
-                    console.log(id)
                     DeleteByID()
                 }}
                 className='text-2xl text-red-300 hover:text-yellow-500'><AiFillDelete /></button>
